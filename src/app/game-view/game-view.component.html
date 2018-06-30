@@ -1,0 +1,36 @@
+<div class="div" style="background: #33b433;border: 1px solid green">
+	
+	<div style="width: 100%; text-align: center; font-size: 35px; font-family: Consolas; margin-top: 50px; ">
+		Daily Music Contest
+	</div>
+
+	<div style="width: 100%; text-align: center; font-size: 35px; font-family: monospace; margin-top: 50px; ">
+		Categories:<br>
+		😃🐻🍔⚽🌇
+	</div>
+
+	<div style="width: 100%; text-align: center; font-size: 35px; font-family: monospace; margin-top: 50px; ">
+		Time to start:<br>
+		2:34:56
+	</div>
+	
+	
+
+	<div style="width: 100%; text-align: center; margin-top: 70px;" >
+		
+		<mat-list>
+		  <mat-list-item *ngFor="let team of game.teams" [style.background]="blue">
+		     <button mat-raised-button style="text-align: center; width: 100%; " >name: {{ team.team }}
+		     </button>
+		  </mat-list-item>
+		</mat-list>
+
+		<button mat-raised-button *ngIf='!inGame' style="font-size: 25px; padding: 7px; width: 50%; background: lightblue">
+			Join
+		</button>
+
+	</div>
+	
+
+
+</div>

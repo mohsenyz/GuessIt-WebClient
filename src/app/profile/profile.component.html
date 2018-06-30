@@ -1,0 +1,35 @@
+
+<div class="div" style="background: #33b433;border: 1px solid green">
+
+	<nav mat-tab-nav-bar style="width: 100%;" >
+	  <a mat-tab-link 
+	     *ngFor="let link of navLinks"
+	     [routerLink]="link.path"
+	     routerLinkActive #rla="routerLinkActive"
+	     [active]="rla.isActive"
+	     style="width: 100%">
+	    {{link.label}}
+	  </a>
+	</nav>
+
+	<router-outlet></router-outlet>
+	
+
+
+
+		<mat-grid-list cols="2" rowHeight="100px">
+		
+			<mat-grid-tile rowspan="1" colspan="2"  >
+				<div style="width: 100%; height: 100%; text-align: center; border: 1px solid green; border-bottom-width: 2px; border-left-width: 0px; border-top-width: 0px; border-right-width: 0px; " >
+					
+					<img src="http://mamadgram.tk/img/faceIcon.PNG">
+				
+				</div>
+			</mat-grid-tile>
+			
+
+
+		</mat-grid-list>
+
+
+</div>
