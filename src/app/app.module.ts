@@ -23,7 +23,8 @@ import { MatButtonModule,
          MatTabsModule,
          MatInputModule,
          MatListModule,
-         MatFormFieldModule }
+         MatFormFieldModule,
+         MatProgressSpinnerModule }
       from '@angular/material';
 
 
@@ -31,6 +32,9 @@ import { ScrollbarModule }         from 'ngx-scrollbar';
 import { ColorPickerModule }       from 'ngx-color-picker';
 
 import { JwtModule }               from '@auth0/angular-jwt';
+import { StartupComponent }        from './startup/startup.component';
+import { ActivationComponent }     from './activation/activation.component';
+import { GamePlayComponent } from './game-play/game-play.component';
 
 
 export function tokenGetter() {
@@ -43,7 +47,10 @@ const appRoutes: Routes = [
   { path: 'interests',          component: InterestsComponent },
   { path: 'main',               component: MainComponent },
   { path: 'profile',            component: ProfileComponent },
-  { path: 'game/:id/view',      component: GameViewComponent },
+  { path: 'game/:gameID/view',  component: GameViewComponent },
+  { path: 'startup',            component: StartupComponent },
+  { path: 'activation',         component: ActivationComponent },
+  { path: 'game/:gameID/team/:teamID/play',      component: GamePlayComponent },
   { path: '',
     redirectTo: '/main',
     pathMatch: 'full'
@@ -60,7 +67,10 @@ const appRoutes: Routes = [
     MainComponent,
     ProfileComponent,
     FriendsComponent,
-    GameViewComponent
+    GameViewComponent,
+    StartupComponent,
+    ActivationComponent,
+    GamePlayComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -80,6 +90,7 @@ const appRoutes: Routes = [
     MatListModule,
     MatFormFieldModule,
     ColorPickerModule,
+    MatProgressSpinnerModule,
 
     JwtModule.forRoot({
       config: {

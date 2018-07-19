@@ -1,7 +1,7 @@
 import { Component,
-				 OnInit,
-				 Injectable }  
-			from '@angular/core';
+		 OnInit
+		}  
+		from '@angular/core';
 
 import { HttpClient }                     from '@angular/common/http';
 import { RouterModule, Router }           from '@angular/router';
@@ -11,8 +11,12 @@ import { MatGridListModule,
 				 MatButtonModule,
 				 MatTabsModule,
 				 MatListModule,
-				}
-			from '@angular/material';
+		}
+		from '@angular/material';
+
+import { MeService } 
+	from '../me.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +25,6 @@ import { MatGridListModule,
 })
 
 
-@Injectable()
 export class ProfileComponent implements OnInit {
 
 
@@ -32,41 +35,31 @@ export class ProfileComponent implements OnInit {
 		{ label: 'profile'		, path: '/profile'}
 	];
 
-	onlineGames = [];
+	user: User;
 
-	nextGames = [];
+  	constructor(
+		private http    	: HttpClient,
+		public  router  	: Router,
+		private MeService	: MeService
+  	) { }
 
-  constructor(
-		private http    : HttpClient,
-		public  router  : Router
-  ) { }
 
+  	ngOnInit() {
+  		this.getProfile();
+  	}
 
-  ngOnInit() {
-  	this.getListOfGames();
-  }
+  	getProfile(): void{
+		this.MeService.getProfile().subscribe(
+			(profileResponse) => {
+				if (profileResponse.ok){
+					this.user = profileResponse.profile;
+				}
+				else {
 
-  getListOfGames(): void{
-  	this.http.post<gameListResponse>('http://localhost:3000/game/list', {})
-		.subscribe(data => {
-			console.log(data);
-      if (data.ok){
-        this.onlineGames = data.games.filter(game => game.started);
-        this.nextGames = data.games.filter(game => !game.started);
-      }
-      else {
-        // try again
-      }
-      //this.getListOfGames();
-		});
-  }
+				}
+			}
+		);
+  	}
+
 }
 
-interface gameListResponse {
-	ok			: string;
-	response 	: string;
-	games 		: [{
-		name 	: string;
-		started	: boolean;
-	}];
-}

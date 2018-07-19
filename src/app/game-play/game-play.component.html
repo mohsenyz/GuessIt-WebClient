@@ -1,0 +1,78 @@
+<div class="div" style="background: #33b433;border: 1px solid green">
+	
+	<div id="topMenu" style="width: 100%; height: 10%; text-align: center; background: red; ">
+		
+	</div>
+	
+	<div id="questionDiv" style="width: 100%; height: 80%; text-align: center; background: green; ">
+		
+		<div id="titleDiv" style="width: 100%; height: 15%; text-align: center; background: yellow; ">
+
+			<div style="width: 100%; height: 100%; border: solid 1px blue; direction: rtl;">
+				
+				<div style="margin: 3% auto; font-family: koodak; font-size: 20px">
+					{{currentQuestion.title}}
+				</div>
+
+			</div>
+
+		</div>
+		
+		<div id="contentDiv" style="width: 100%; height: 35%; text-align: center; background: blue; ">
+
+				<div style=" direction: rtl; font-family: koodak; font-size: 30px; ">
+					
+					<mat-grid-list cols="4" rowHeight="155px" style="border: solid 1px black;">
+
+					<mat-grid-tile *ngFor="let media of currentQuestion.media" colspan="1" rowspan="1">
+						
+						<button mat-flat-button style="width: 100%; background: #33aa33; border-radius: 0px 0px 10px 10px; color: white; font-size: 15px; font-family: cursive;" (click)="sendAnswer(choice)">
+							<img src="{{media}}">
+						</button>
+
+					</mat-grid-tile>
+
+				</mat-grid-list>
+
+				</div>
+			
+		</div>
+		
+		<div id="helpDiv" style="width: 100%; height: 15%; font-size: 20px; text-align: center; background: red; ">
+			<mat-grid-list cols="5" rowHeight="65px" style="border: solid 1px black;">
+				<mat-grid-tile *ngFor="let help of helps" colspan="1" rowspan="1">
+					{{help}}
+				</mat-grid-tile>
+
+			</mat-grid-list>
+			
+
+		</div>
+		
+		<div id="answeringDiv" style="width: 100%; height: 35%; text-align: center; background: blue; ">
+			<div style=" margin: auto; direction: rtl; font-family: koodak">
+				
+				<mat-grid-list cols="2" rowHeight="77px" style="border: solid 1px black;">
+
+					<mat-grid-tile *ngFor="let choice of currentQuestion.choices" colspan="1" rowspan="1">
+						
+						<button mat-flat-button style="width: 100%; height: 100%; background: #33aa33; border-radius: 0px 0px 10px 10px; color: white; font-size: 15px; font-family: cursive;" (click)="sendAnswer(choice)">
+							{{choice}}
+						</button>
+
+					</mat-grid-tile>
+
+				</mat-grid-list>
+				
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div id="bottomMenu" style="width: 100%; height: 10%; text-align: center; background: gray; ">
+
+	</div>
+
+</div>

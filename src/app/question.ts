@@ -1,0 +1,13 @@
+export class Question {
+	_id			: string;
+	number		: number;
+	template 	: string;
+	title 		: string;
+	category 	: string;
+	answer 		: [string];
+	choices 	: [string];
+	tags	 	: [string];
+	helps 		: [string];
+	media 		: [string];
+	
+}

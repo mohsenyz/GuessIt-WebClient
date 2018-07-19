@@ -1,27 +1,38 @@
 import { Component,
-				 OnInit,
-				 Injectable }  
-			from '@angular/core';
+		 OnInit,
+		 Injectable }  
+	from '@angular/core';
 
 import { HttpClient }
-			from '@angular/common/http';
+	from '@angular/common/http';
 
 import { RouterModule,
-				 Router,
-				 ActivatedRoute
-				}
-			from '@angular/router';
+		 Router,
+		 ActivatedRoute
+		}
+	from '@angular/router';
 
 import { User }
-			from '../user';
+	from '../user';
+import { sendAnswerResponse }
+	from '../sendAnswerResponse';
+import { viewGameResponse }
+	from '../viewGameResponse';
+import { joinGameResponse }
+	from '../joinGameResponse';
+
 
 import { MatGridListModule,
-				 MatButtonToggleModule,
-				 MatButtonModule,
-				 MatTabsModule,
-				 MatListModule,
-				}
-			from '@angular/material';
+		 MatButtonToggleModule,
+		 MatButtonModule,
+		 MatTabsModule,
+		 MatListModule,
+		}
+	from '@angular/material';
+
+import { GameService } 
+	from '../game.service';
+
 
 @Component({
   selector: 'app-game-view',
@@ -37,114 +48,61 @@ export class GameViewComponent implements OnInit {
 	inGame = false;
 
   constructor(
-		private http    : HttpClient,
-		public  router  : Router,
-		private route 	: ActivatedRoute
+		private http    	: HttpClient,
+		public  router  	: Router,
+		private route 		: ActivatedRoute,
+    	private GameService : GameService
   ) { }
 
 
   ngOnInit() {
-  	this.http.post<gameViewResponse>(`http://localhost:3000/game/${this.route.snapshot.params.id}/view`, {})
-		.subscribe(data => {
-
-			console.log(data);
-
-      if (data.ok){
-        this.game = data.game;
-    		    		
-    		data.game.teams.forEach(function(team){
-    			team.players.forEach(function(player){
-    				console.log(player.player);
-    				console.log(localStorage.getItem("username"));
-
-    				if (player.player == localStorage.getItem("username")){
-    					this.inGame = true;
-    				}
-    			});
-    		});
-
-
-      }
-      else {
-        // try again
-      }
-		});
-
+  	this.viewGame(this.route.snapshot.params.gameID);
   }
-}
 
 
-interface gameViewResponse {
-	ok							: string;
-	response 				: string;
-	problem					: string;
+  viewGame(gameID: string): void{
+  	this.GameService.viewGame(gameID).subscribe(
+		(viewGameResponse: viewGameResponse) => {
+			if (viewGameResponse.ok){
+				
+				this.game = viewGameResponse.game;
+    		    		
+	    		viewGameResponse.game.teams.forEach(function(team){
+	    			team.players.forEach(function(player){
+	    				console.log(player.player);
+	    				console.log(localStorage.getItem("username"));
 
-	game 						: {
-		name					: string;
-		teams					: [{
-			team				: string;
-			
-			players			: [{
-				player		: string;
-				rounds		: [ number ]
-			}],
-			
-			rounds			: [{
-				players		: [{
-					player	: string;
-					answer	: {
-						content	: String;
-					}
-				}],
-				question	: string;
-				helps			: [{
-					help		: string;
-					usage		: number;
-					date		: Date;
-				}],
-				score			: number;
-			}]
-		}],
-		
-		rules					: {
-			rounds			: [{
-				category	: string;
-				tags			: [ string ];
-				level			: {
-					min			: number;
-					max			: number;
-				}
-			}],
-			
-			teams				: {
-				level			: {
-					min			: number;
-					max			: number;
-				}
-			},
-			
-			start				: {
-				date			: Date;
-				teams			: number;
-			},
-			
-			duration		: number;
-			
-		},
-		
-		questions			: [{}];
-		
-		result				: {
-			winner			: string;
-		},
-		
-		statics				: {
-			teams				: number;
-		},
-		
-		creator				: string;
-		
-		started				: boolean;
-		
-	}
+	    				if (player.player == localStorage.getItem("username")){
+	    					this.inGame = true;
+	    				}
+	    			});
+	    		});
+
+			}
+			else {
+
+			}
+		}
+    );
+  }
+
+
+
+  joinGame(gameID: string): void{
+    this.GameService.joinGame(gameID, localStorage.getItem("username")).subscribe(
+		(joinGameResponse: joinGameResponse) => {
+			if (joinGameResponse.ok){
+
+				this.router.navigate([`/game/${gameID}/team/${localStorage.getItem("username")}/play`]);
+
+			}
+			else {
+
+			}
+		}
+    );
+  }
+
+
+
 }
