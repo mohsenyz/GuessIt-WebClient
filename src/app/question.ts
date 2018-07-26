@@ -8,6 +8,6 @@ export class Question {
 	choices 	: [string];
 	tags	 	: [string];
 	helps 		: [string];
-	media 		: [string];
+	subtitle	: [string];
 	
 }

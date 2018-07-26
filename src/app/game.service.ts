@@ -15,12 +15,18 @@ import { Question }
 
 import { Game }
 	from './game';
+	
 import { sendAnswerResponse }
 	from './sendAnswerResponse';
+
 import { viewGameResponse }
 	from './viewGameResponse';
+
 import { joinGameResponse }
 	from './joinGameResponse';
+
+import { gameNewResponse }
+	from './gameNewResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +48,10 @@ export class GameService {
 	
 	sendAnswer(gameID: string, round: number, answer: string): Observable<sendAnswerResponse>{
 		return this.http.post<sendAnswerResponse>(`http://localhost:3000/game/${gameID}/round/${round}/answer`, { answer: answer, questionID: round});
+	}
+
+	gameNew(type: string, tags: string[]): Observable<gameNewResponse>{
+		return this.http.post<gameNewResponse>(`http://localhost:3000/game/new`, { type: type, tags: tags });
 	}
 
 }

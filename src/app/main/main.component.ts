@@ -1,18 +1,27 @@
 import { Component,
 				 OnInit,
 				 Injectable }  
-			from '@angular/core';
+	from '@angular/core';
 
-import { HttpClient }                     from '@angular/common/http';
-import { RouterModule, Router }           from '@angular/router';
-import { User }                           from '../user';
+import { HttpClient }
+  from '@angular/common/http';
+
+import { RouterModule, Router }
+  from '@angular/router';
+
+import { User }
+  from '../user';
+
+import { Game }
+  from '../game';
+
 import { MatGridListModule,
 				 MatButtonToggleModule,
 				 MatButtonModule,
 				 MatTabsModule,
 				 MatListModule,
 				}
-			from '@angular/material';
+	from '@angular/material';
 
 @Component({
   selector: 'app-main',
@@ -32,15 +41,14 @@ export class MainComponent implements OnInit {
 		{ label: 'profile'		, path: '/profile'}
 	];
 
-	onlineGames = [];
+	onlineGames    : Game[];
 
-	nextGames = [];
+	nextGames      : Game[];
 
   constructor(
 		private http    : HttpClient,
 		public  router  : Router
   ) { }
-
 
   ngOnInit() {
   	this.getListOfGames();
@@ -77,9 +85,9 @@ export class MainComponent implements OnInit {
 
 
   watchJoin(id: string): void{
-  	this.http.post<gameJoinResponse>('http://localhost:3000/game/list', {})
-		.subscribe(data => {
-			console.log(data);
+    this.http.post<gameJoinResponse>('http://localhost:3000/game/list', {})
+    .subscribe(data => {
+      console.log(data);
       if (data.ok){
         // redirect to game view
       }
@@ -87,8 +95,18 @@ export class MainComponent implements OnInit {
         // try again
       }
       // this.getListOfGames();
-		});
+    });
   }
+
+  gameNew(): void{
+    this.router.navigate([`/game/new`]);
+  }
+
+  quickPlay(): void{
+    this.router.navigate([`/game/${this.nextGames[0].name}/view`]);
+  }
+
+
 
 
 }
@@ -98,11 +116,7 @@ export class MainComponent implements OnInit {
 interface gameListResponse {
 	ok				: string;
 	response 	: string;
-	games 		: [{
-		_id			: string;
-		name 		: string;
-		started	: boolean;
-	}];
+	games 		: [Game];
 }
 
 interface gameJoinResponse {

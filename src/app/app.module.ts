@@ -35,6 +35,7 @@ import { JwtModule }               from '@auth0/angular-jwt';
 import { StartupComponent }        from './startup/startup.component';
 import { ActivationComponent }     from './activation/activation.component';
 import { GamePlayComponent } from './game-play/game-play.component';
+import { GameNewComponent } from './game-new/game-new.component';
 
 
 export function tokenGetter() {
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
   { path: 'game/:gameID/view',  component: GameViewComponent },
   { path: 'startup',            component: StartupComponent },
   { path: 'activation',         component: ActivationComponent },
+  { path: 'game/new',           component: GameNewComponent },
   { path: 'game/:gameID/team/:teamID/play',      component: GamePlayComponent },
   { path: '',
     redirectTo: '/main',
@@ -70,7 +72,8 @@ const appRoutes: Routes = [
     GameViewComponent,
     StartupComponent,
     ActivationComponent,
-    GamePlayComponent
+    GamePlayComponent,
+    GameNewComponent
   ],
   imports: [
     RouterModule.forRoot(
