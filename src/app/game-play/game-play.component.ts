@@ -48,7 +48,7 @@ import { GameService }
 
 @Injectable()
 export class GamePlayComponent implements OnInit {
-	gamedEnded		: boolean = false;
+	gameEnded		: boolean = false;
 	game 			: Game;
 	currentQuestion : Question;
 	currentRound	: number = 1;
@@ -100,12 +100,13 @@ export class GamePlayComponent implements OnInit {
 		(sendAnswerResponse: sendAnswerResponse) => {
 			if (sendAnswerResponse.ok){
 				this.score += sendAnswerResponse.score;
-				this.loadNextQuestion();
+				//this.loadNextQuestion();
 			} else {
 				console.log('errooooooooooor');
-				this.loadNextQuestion();
+				//this.loadNextQuestion();
 			}
 		});
+		this.loadNextQuestion();
 	}
 
 	loadNextQuestion(): void{
@@ -113,8 +114,8 @@ export class GamePlayComponent implements OnInit {
 			this.currentRound += 1;
 			this.currentQuestion = this.game.questions[this.currentRound - 1];
 		} else {
-			this.gamedEnded = true;
-			console.log('1');
+			this.gameEnded = true;
+			console.log('game ended');
 		}
 	}
 

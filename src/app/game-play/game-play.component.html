@@ -1,6 +1,6 @@
 <div class="div" style="background: green;border: 1px solid darkgreen">
 	
-	<div *ngIf="!gameEnded" style="width: 100%; height: 100%;">
+	<div *ngIf="gameEnded == false" style="width: 100%; height: 100%;">
 		<div id="topMenu" style="width: 100%; height: 10%; text-align: center; ">
 			<div style="font-family: gabroila; font-size: 20px"> 
 				score : {{score}}
@@ -29,7 +29,17 @@
 
 							<mat-grid-tile *ngFor="let subtitle of currentQuestion.subtitle" colspan="1" rowspan="1">
 
-								<img src="{{subtitle}}" style="max-height: 95%; max-width: 95%; border-radius: 10px; ">
+								<p *ngIf="currentQuestion.subtitleType == 'text'" style="max-height: 95%; max-width: 95%; border-radius: 10px; font-size: 15px; ">{{subtitle}}</p>
+
+								<img *ngIf="currentQuestion.subtitleType == 'image'" src="{{subtitle}}" style="max-height: 95%; max-width: 95%; border-radius: 10px; ">
+
+								<audio *ngIf="currentQuestion.subtitleType == 'audio'" style="max-height: 95%; max-width: 95%; border-radius: 10px; ">
+									<source src="{{subtitle}}" type="audio/mpeg">
+								</audio>
+
+								<video *ngIf="currentQuestion.subtitleType == 'video'" style="max-height: 95%; max-width: 95%; border-radius: 10px; " autoplay>
+									<source src="{{subtitle}}" type="video/mp4">
+								</video>
 
 							</mat-grid-tile>
 
@@ -62,7 +72,17 @@
 						<mat-grid-tile *ngFor="let choice of currentQuestion.choices" colspan="1" rowspan="1">
 							
 							<button mat-flat-button style="width: 100%; height: 100%; background: #33aa33; border-radius: 10px; color: white; font-size: 15px; font-family: cursive;" (click)="sendAnswer(choice)">
-								{{choice}}
+								<p *ngIf="currentQuestion.answerType == 'text'" style="max-height: 95%; max-width: 95%; border-radius: 10px; font-size: 15px; ">{{choice}}</p>
+
+								<img *ngIf="currentQuestion.answerType == 'image'" src="{{choice}}" style="max-height: 95%; max-width: 95%; border-radius: 10px; ">
+
+								<audio *ngIf="currentQuestion.answerType == 'audio'" style="max-height: 95%; max-width: 95%; border-radius: 10px; ">
+									<source src="{{choice}}" type="audio/mpeg">
+								</audio>
+
+								<video *ngIf="currentQuestion.answerType == 'video'" style="max-height: 95%; max-width: 95%; border-radius: 10px; " autoplay>
+									<source src="{{choice}}" type="video/mp4">
+								</video>
 							</button>
 
 						</mat-grid-tile>
@@ -81,7 +101,7 @@
 		</div>
 	</div>
 
-	<div *ngIf="gameEnded" style="width: 100%; height: 100%;">
+	<div *ngIf="gameEnded == true" style="width: 100%; height: 100%; ">
 		game ended
 	</div>
 

@@ -32,7 +32,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() { 
     
-    var Nanobar = require('C:/Users/MP/Dropbox/Projects/GuessIt/GuessIt-WebClient/node_modules/nanobar/nanobar.js');
+    var Nanobar = require('nanobar/nanobar.js');
     var nanobar = new Nanobar({ classname: "nanobarClass",
                                 id  : "nanobarId",
                                 target: document.getElementById('loginDiv')

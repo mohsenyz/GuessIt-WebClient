@@ -9,5 +9,6 @@ export class Question {
 	tags	 	: [string];
 	helps 		: [string];
 	subtitle	: [string];
-	
+	subtitleType: [string];
+	answerType	: [string];
 }
