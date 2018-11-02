@@ -2,6 +2,7 @@ import { Component, OnInit, Injectable } 	from '@angular/core';
 import { HttpClient } 						from '@angular/common/http';
 import { RouterModule, Router } 			from '@angular/router';
 
+import { activationResponse }				from '../activationResponse';
 
 @Component({
   selector: 'app-activation',
@@ -18,6 +19,21 @@ export class ActivationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+  
+  active(code): void {
+  	this.http.post<activationResponse>(`${localStorage.getItem("server")}/signup/activation/user/${localStorage.getItem("username")}/code/${code}`, { })
+		.subscribe(data => {
+			console.log(data);
+	
+      if (data.ok){
+        this.router.navigate(['/interests']);
+      }
+      else {
+      	
+      }
+      
+	});
   }
 
 }

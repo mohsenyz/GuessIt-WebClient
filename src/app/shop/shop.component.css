@@ -1,0 +1,19 @@
+.div{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    border: 1px solid #00c;
+    border-radius: 10px;
+    background: white;
+}
+
+
+
+.goodsList .mat-list-item {
+  height: auto;
+  padding-bottom: 10px;
+}
+.goodsList .mat-list-item {
+  height: auto;
+  padding-bottom: 10px;
+}

@@ -3,12 +3,17 @@ export class Question {
 	number		: number;
 	template 	: string;
 	title 		: string;
-	category 	: string;
 	answer 		: [string];
 	choices 	: [string];
-	tags	 	: [string];
 	helps 		: [string];
 	subtitle	: [string];
-	subtitleType: [string];
-	answerType	: [string];
+	title_fa	: string;
+	answer_fa	: [string];
+	choices_fa	: [string];
+	helps_fa	: [string];
+	subtitle_fa	: [string];
+	subtitleType: string;
+	answerType	: string;
+	tags	 	: [string];
+	type 		: string;
 }

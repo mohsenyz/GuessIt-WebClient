@@ -1,9 +1,9 @@
 .div{
-    width: 50%;
-    height: 100%;
-    min-width: 500px;
-    margin: auto;
+    width: 60vw;
+    height: 85vh;
+    margin-top: 7.5vh;
+    margin-left: 20vw;
     border: 1px solid #00c;
     border-radius: 10px;
-    background: white;
 }
+

@@ -1,39 +1,27 @@
-<div class="div" style="background: #33b433;border: 1px solid green">
-	
-	<div style="width: 100%; text-align: center; font-size: 35px; font-family: Consolas; margin-top: 50px; ">
-		Daily Music Contest
-	</div>
-	
-	<div style="width: 100%; text-align: center; font-size: 35px; font-family: monospace; margin-top: 50px; ">
-		Categories:<br>
-		😃🐻🍔⚽🌇
-	</div>
-	
-	<div style="width: 100%; text-align: center; font-size: 35px; font-family: monospace; margin-top: 50px; ">
-		Time to start:<br>
-		2:34:56
-	</div>
-	
-	
-	
-	<div style="width: 100%; height: 20px; text-align: center; margin-top: 20px;" >
-		
-		<mat-list>
-		  <mat-list-item *ngFor="let team of game.teams" [style.background]="blue">
-		     <button mat-raised-button style="text-align: center; width: 100%; " >name: {{ team.team }}
-		     </button>
-		  </mat-list-item>
-		</mat-list>
-	</div>
 
+<div class="div" style="background: #33b433;border: 1px solid green; font-size: 25px; font-family: monospace; display: flex; text-align: center; flex-direction: column; align-items: center;">
+
+	<div style="flex: 20%; padding: 40px; font-size: 30px;" [innerHtml]="game.name"></div>
 	
-	<div style="width: 100%; text-align: center; margin-top: 20px;" >
-		<button mat-raised-button *ngIf='!inGame' style="font-size: 25px; padding: 7px; width: 50%; background: lightblue" (click)="joinGame(game.name)">
+	<div style="flex: 15%; " [innerHtml]="'Categories: ' + game.rules.rounds.tags"></div>
+	
+	<div style="flex: 15%; " [innerHtml]="'Time of start: ' + game.rules.start.date"></div>
+	
+	<mat-list style="flex: 30%; width: 70%; overflow-y: scroll; ">
+		<mat-list-item *ngFor="let team of game.teams" [style.background]="blue">
+			<button mat-raised-button style="text-align: center; width: 100%; " >name: {{ team.team }}
+			</button>
+		</mat-list-item>
+	</mat-list>
+	
+	<div style="flex: 25%; width: 100%; height: 100%;">
+		<button mat-raised-button *ngIf='!inGame()' style="font-size: 25px; width: 35%; height: 45%; margin-top: 7%; background: lightblue;" (click)="joinGame(game.name)">
 			Join
 		</button>
 		
+		<button mat-raised-button *ngIf='inGame()' style="font-size: 25px; width: 35%; height: 45%; margin-top: 7%; background: lightblue;" (click)="openGame(game.name)">
+			Open Game
+		</button>
+		
 	</div>
-	
-
-
 </div>

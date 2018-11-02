@@ -5,34 +5,35 @@ import { User } 							from '../user';
 
 
 @Component({
-  selector		: 'app-login',
-  templateUrl	: './login.component.html',
-  styleUrls		: ['./login.component.css']
+	selector		: 'app-login',
+	templateUrl		: './login.component.html',
+	styleUrls		: ['./login.component.css']
 })
 
 @Injectable()
 export class LoginComponent implements OnInit {
 	
-	usernameStatus 						= 'Enter your username here';
-  passwordStatus 						= 'Enter your password here';
+	problem					= '';
+	usernameStatus 			= 'Enter your username here';
+	passwordStatus 			= 'Enter your password here';
 
-  usernameStatusColor 			= "#C0C0C0";
-  passwordStatusColor 			= "#C0C0C0";
+	usernameStatusColor 	= "#C0C0C0";
+	passwordStatusColor 	= "#C0C0C0";
 
 
-  constructor(
-  	private http	: HttpClient,
-  	public 	router 	: Router
-  ) { }
-
-  ngOnInit() { }
+	constructor(
+		private http	: HttpClient,
+		public 	router 	: Router
+	) { }
+	
+	ngOnInit() { }
 	
 	login(username: string, password: string): void {		
-		this.http.post<LoginResponse>('http://localhost:3000/login',
-		 { username: username, password: password })
-			.subscribe(data => {
+		this.http.post<LoginResponse>(`${localStorage.getItem("server")}/login`,
+			{ username: username, password: password }).subscribe(data => {
+				
 				console.log(data);
-
+				
 				if (data.ok){
 					localStorage.setItem("access_token", data.token);
 					localStorage.setItem("username", username);
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit {
 				}
 				else {
 					this.router.navigate(['/login']);
+					this.problem = data.problem;
 				}
 
 			});
@@ -88,7 +90,10 @@ export class LoginComponent implements OnInit {
 
 interface LoginResponse {
 	response 	: string;
-  ok		 	: string;
-  token 		: string;
-  user 			: string;
+	ok		 	: string;
+	token 		: string;
+	user 		: string;
+	username	: string;
+	password	: string;
+	problem		: string;
 }

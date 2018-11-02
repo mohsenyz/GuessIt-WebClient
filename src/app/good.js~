@@ -1,0 +1,7 @@
+
+export class Good {
+	name					: string;
+	count					: number;
+	cost					: number;
+	
+}

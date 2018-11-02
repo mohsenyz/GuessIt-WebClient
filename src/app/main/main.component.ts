@@ -16,12 +16,19 @@ import { Game }
   from '../game';
 
 import { MatGridListModule,
-				 MatButtonToggleModule,
-				 MatButtonModule,
-				 MatTabsModule,
-				 MatListModule,
-				}
-	from '@angular/material';
+		 MatButtonToggleModule,
+		 MatButtonModule,
+		 MatTabsModule,
+		 MatListModule,
+		 MatProgressBar
+		} from '@angular/material';
+
+import {ScrollDispatchModule
+		} from '@angular/cdk/scrolling';
+
+import { MeService } 
+  from '../me.service';
+
 
 @Component({
   selector: 'app-main',
@@ -37,40 +44,71 @@ export class MainComponent implements OnInit {
 	arrayColors = [];
 	navLinks = [
 		{ label: 'friends'		, path: '/friends'},
-		{ label: 'play'				, path: '/main'},
-		{ label: 'profile'		, path: '/profile'}
+		{ label: 'play'			, path: '/main'},
+		{ label: 'profile'		, path: '/profile'},
+		{ label: 'shop'			, path: '/shop'}
 	];
 
-	onlineGames    : Game[];
+	startedGames    : Game[];
 
-	nextGames      : Game[];
+	games      : Game[];
+	wantedGames: Game[];
+  user: User;
+
 
   constructor(
 		private http    : HttpClient,
-		public  router  : Router
+		public  router  : Router,
+    private MeService : MeService
   ) { }
 
   ngOnInit() {
+  	var Nanobar = require('nanobar/nanobar.js');
+    var nanobar = new Nanobar({ classname	: "nanobarClass",
+                                id  		: "nanobarId",
+                                target		: document.getElementById('main')
+                                });
+    nanobar.go(100);
+    
+    this.getProfile();
   	this.getListOfGames();
+    //setInterval(() => this.timeToStartTimer(), 1000);
   }
 
   getListOfGames(): void{
-  	this.http.post<gameListResponse>('http://localhost:3000/game/list', {})
+  	this.http.post<gameListResponse>(`${localStorage.getItem("server")}/game/list`, {})
 		.subscribe(data => {
 			console.log(data);
-      if (data.ok){
-        this.onlineGames = data.games.filter(game => game.started);
-        this.nextGames = data.games.filter(game => !game.started);
-      }
-      else {
-        // try again
-      }
-      //this.getListOfGames();
+			if (data.ok){
+
+				this.games = data.games;
+				this.wantedGames = data.games;
+
+				this.games.forEach(function(game){
+					game.timeToStart = Math.round((new Date(game.rules.start.date).getTime() - Date.now()) / 1000);
+				});
+				
+				//console.log(this.games);
+
+				//console.log(new Date(data.games[0].rules.start.date).getTime());
+				//console.log(Date.now());
+
+
+
+			}
+			else {
+				// try again
+			}
+
+			
+
 		});
+		
+	//setTimeout(this.getListOfGames(), 1000 * 20);
   }
 
   gameJoin(id: string): void{
-  	this.http.post<gameJoinResponse>(`http://localhost:3000/game/${id}/team/online6731/join`, {})
+  	this.http.post<gameJoinResponse>(`${localStorage.getItem("server")}/game/${id}/team/online6731/join`, {})
 		.subscribe(data => {
 			console.log(data);
       if (data.ok){
@@ -80,12 +118,16 @@ export class MainComponent implements OnInit {
         // try again
       }
       // this.getListOfGames();
-		});
+	});
+  }
+
+  openGame(id: string): void{
+    this.router.navigate([`/game/${id}/view`]);
   }
 
 
   watchJoin(id: string): void{
-    this.http.post<gameJoinResponse>('http://localhost:3000/game/list', {})
+    this.http.post<gameJoinResponse>('${localStorage.getItem("server")}/game/list', {})
     .subscribe(data => {
       console.log(data);
       if (data.ok){
@@ -103,11 +145,38 @@ export class MainComponent implements OnInit {
   }
 
   quickPlay(): void{
-    this.router.navigate([`/game/${this.nextGames[0].name}/view`]);
+    this.router.navigate([`/game/${this.games[0].name}/view`]);
   }
 
 
 
+  getProfile(): void{
+    this.MeService.getProfile().subscribe(
+      (profileResponse) => {
+        if (profileResponse.ok){
+          this.user = profileResponse.profile;
+        }
+        else {
+
+        }
+      }
+    );
+  }
+
+  timeToStartTimer(): void{
+    //console.log("game.timeToStart");
+    if (this.games){
+      //console.log("game.timeToStart");
+      this.games.forEach(function(game){
+        if (game.timeToStart > -1000){
+          game.timeToStart -= 1;
+        }
+        //console.log(game.timeToStart);
+      });
+      
+    }
+    
+  }
 
 }
 

@@ -1,31 +1,20 @@
-
-<link rel="stylesheet" type="javascript" href="C:/Users/MP/Dropbox/Projects/GuessIt/GuessIt-WebClient/node_modules/nanobar/nanobar.js">
-<div class="div">
-
-	<form class="form">
+<div id="main" style="display: flex; text-align: center; flex-direction: column; align-items: center;">
+	
+	<form class="form" style="width: 100%; ">
+		<div name="title" style="flex: 20%; width: 100%; padding: 10%; font-size: 30px; background: red; " [innerHtml]="'Activation'"></div>
 		
-			<ul>
-
-				<li>
-					<p name="title">
-						(◕‿◕)
-					</p>
-				</li>
-				
-				<li>
-					<mat-form-field class="field">
-				    	<input matInput #codeInput type="code" name="code" placeholder="code" maxlength="50" (keyup)="codeChanged(codeInput.value)">
-				    </mat-form-field>
-				</li>
-				
-				<li>
-					<button mat-raised-button name="login" (click)="login(usernameInput.value, codeInput.value)" value="login">login</button>
-				</li>
-			
-			</ul>
+		<mat-form-field class="field" style="display: flex; text-align: center; flex-direction: column; align-items: center; flex: 20%; width: 100%; padding-top: 20%; ">
+	    	<input matInput #codeInput type="code" name="code" style="flex: 100%; width: 100%; "
+	    			placeholder="code" maxlength="5" (keyup)="codeChanged(codeInput.value)">
+	    </mat-form-field>
+	    
+	    <div style="flex: 20%; padding-top: 20%; ">
+		
+			<button mat-raised-button name="active" 
+					(click)="active(codeInput.value)" value="active">active</button>
+					
+		</div>
 		
 	</form>
 	
-	
 </div>
-

@@ -22,7 +22,7 @@ export class MeService {
   	
 
 	getProfile(): Observable<profileResponse>{
-		return this.http.post<profileResponse>('http://localhost:3000/me/profile', {});
+		return this.http.post<profileResponse>(`${localStorage.getItem("server")}/me/profile`, {});
 	}
 
 }

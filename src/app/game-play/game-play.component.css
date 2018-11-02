@@ -1,9 +1,16 @@
 .div{
-    width: 50%;
-    height: 100%;
-    min-width: 500px;
-    margin: auto;
+    width: 90vw;
+    height: 90vh;
+    margin-top: 5vh;
+    margin-left: 5vw;
     border: 1px solid #00c;
     border-radius: 10px;
-    background: white;
+}
+
+.form .field{
+    width: 100%;
+    font-size: 25px;
+    text-align: center;
+    color: blue;
+
 }

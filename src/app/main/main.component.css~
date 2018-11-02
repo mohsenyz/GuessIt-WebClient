@@ -1,0 +1,87 @@
+
+#main{
+
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+
+    max-width:100%;
+    max-height:100%;
+    overflow:auto;
+    
+    border: 1px solid #00c;
+    border-radius: 0;
+    
+    background: #0288d1;
+    
+    width: 100vw;
+	height: 100vh;
+	
+	display: flex;
+	text-align: center;
+	flex-direction: column;
+	align-items: center;
+
+}
+
+
+@media (min-width: 800px) {
+
+	#main{
+	
+	}
+
+}
+
+@media (max-width: 800px) {
+
+	#main{
+	
+	}
+
+}
+
+
+
+
+.nanobarClass{
+    border-radius: 0;
+    border: 1px solid blue;
+}
+
+.inListItem {
+	display: flex;
+	text-align: center; 
+	flex-direction: column; 
+	align-items: center;
+	
+	/*
+    background: #29b6f6;
+    opacity: 0.87;
+    */
+    border-radius: 50%;
+    border: 1px solid blue;
+    
+    min-width: 70px; 
+    min-height: 70px;
+    
+    width: auto;
+    height: auto;
+    
+    padding: 10px;
+    
+    
+}
+
+.listItem:hover {
+	background: rgba(256, 256, 256, 0.9);
+}
+
+.listItem {
+	cursor: pointer;
+}
+
+

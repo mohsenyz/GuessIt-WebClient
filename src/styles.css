@@ -1,11 +1,24 @@
+@import url( 'https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons');
+
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url("node_modules/primeicons/primeicons.css");
+@import url("node_modules/primeng/resources/themes/nova-light/theme.css");
+@import url("node_modules/primeng/resources/primeng.min.css");
+
+/*
 @import url('https://fonts.google.com/specimen/Eczar');
 @import url('https://fonts.google.com/specimen/Bitter');
 @import url('https://fonts.google.com/specimen/Work+Sans');
 @import url('https://fonts.google.com/specimen/Lobster');
 @import url('https://fonts.google.com/specimen/Lalezar');
 @import url('https://fonts.google.com/specimen/Simonetta');
+*/
+
+@font-face {
+  font-family: 'Baloo Bhaijaan';
+  src: url('assets/fonts/BalooBhaijaan-Regular.ttf');
+}
 
 @font-face {
   font-family: 'koodak';

@@ -1,37 +1,28 @@
-
-<link rel="stylesheet" type="javascript" href="C:/Users/MP/Dropbox/Projects/GuessIt/GuessIt-WebClient/node_modules/nanobar/nanobar.js">
-
-<div class="div">
-
-	<form class="form">
+<div id="main" style="display: flex; text-align: center; flex-direction: column; align-items: center;">
+	<form class="form" style="color: #b71c1c">
 		
-			<ul>
-
-				<li>
-					<p name="title">
-						(◕‿◕)
-					</p>
-				</li>
-
-				<li>
-				    <mat-form-field class="field">
-				    	<input matInput #usernameInput type="text" name="username" placeholder="username" maxlength="50" (keyup)="usernameChanged(usernameInput.value)">
-					</mat-form-field>
-				</li>
-				
-				<li>
-				    <mat-form-field class="field">
-				    	<input matInput #passwordInput type="password" name="password" placeholder="password" maxlength="50" (keyup)="passwordChanged(passwordInput.value)">
-					</mat-form-field>
-				</li>
-				
-				<li>
-					<button mat-raised-button name="login" (click)="login(usernameInput.value, passwordInput.value)" value="login">login</button>
-				</li>
+		<div class="title" style="flex: 20%; padding: 12%; padding-bottom: 10%; " [innerHtml]="'WHO KNOWS'"></div>
+		
+	    <mat-form-field class="field" style="flex: 20%; width: 60%; ">
+	    	<input matInput #usernameInput type="text" name="username" maxlength="50" (keyup)="usernameChanged(usernameInput.value)">
+			<mat-placeholder class="placeholder">username</mat-placeholder>
+		</mat-form-field>
+		
+	    <mat-form-field class="field" style="flex: 20%; width: 60%; ">
+			<input matInput #passwordInput type="password" name="password" maxlength="50" (keyup)="passwordChanged(passwordInput.value)">
+			<mat-placeholder class="placeholder">password</mat-placeholder>
+		</mat-form-field>
+		
+		<div class="error" style="flex: 10%; padding: 5%; ">
+			<label> {{ problem }} </label>
+		</div>
+		
+		<div style="flex: 20%; display: flex; text-align: center; flex-direction: column; align-items: center;">
 			
-			</ul>
+			<button mat-button name="login" style="flex: 100%; width: 50%; "
+					(click)="login(usernameInput.value, passwordInput.value)" value="Login">login</button>
+				
+		</div>
 		
 	</form>
-	
 </div>
-

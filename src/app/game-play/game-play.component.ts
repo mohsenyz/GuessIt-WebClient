@@ -32,6 +32,7 @@ import { MatGridListModule,
 		 MatButtonModule,
 		 MatTabsModule,
 		 MatListModule,
+		 MatInputModule,
 		}
 	from '@angular/material';
 
@@ -51,7 +52,7 @@ export class GamePlayComponent implements OnInit {
 	gameEnded		: boolean = false;
 	game 			: Game;
 	currentQuestion : Question;
-	currentRound	: number = 1;
+	currentRound	: number = -1;
 	score 			: number = 0;
 
 	constructor(
@@ -73,16 +74,11 @@ export class GamePlayComponent implements OnInit {
 					
 					this.game = viewGameResponse.game;
 	    		    
-	    		    this.currentQuestion = this.game.questions[0];
+	    		    this.loadNextQuestion();
 
 		    		viewGameResponse.game.teams.forEach(function(team){
-		    			team.players.forEach(function(player){
-		    				console.log(player.player);
-		    				console.log(localStorage.getItem("username"));
-
-		    				if (player.player == localStorage.getItem("username")){
-		    					this.inGame = true;
-		    				}
+		    			team.members.forEach(function(player){
+		    				
 		    			});
 		    		});
 		    		
@@ -110,9 +106,9 @@ export class GamePlayComponent implements OnInit {
 	}
 
 	loadNextQuestion(): void{
-		if (this.currentRound < this.game.questions.length){
+		if (this.currentRound < this.game.questions.length - 1){
 			this.currentRound += 1;
-			this.currentQuestion = this.game.questions[this.currentRound - 1];
+			console.log(this.currentQuestion);
 		} else {
 			this.gameEnded = true;
 			console.log('game ended');

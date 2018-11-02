@@ -1,0 +1,5 @@
+
+export class sendAnswerResponse {
+	ok						: string;
+	response 				: string;
+}

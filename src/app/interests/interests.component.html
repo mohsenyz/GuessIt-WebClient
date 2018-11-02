@@ -1,39 +1,37 @@
-<div class="div" style="background: #33b433;border: 1px solid green">
+<div id="main" style="background: #33b433;border: 1px solid green; display: flex; text-align: center; flex-direction: column; align-items: center;">
 	
-	<div style="width: 100%; height: 15%;  border: 0px solid black;">
-		<div style="margin-top: 10%; width: 100%; text-align: center;">
+	<div style="width: 100%; flex: 20%;  border: 0px solid black;">
+		<div style="padding-top: 7%; width: 100%; text-align: center;">
 			<label [@fade]="in" style="font-family: cursive ;font-size: 30px; color: white">Pick your Interests</label>
 		</div>
 	</div>
 	
-	<ng-scrollbar style="height: 70%;">
-		<mat-grid-list cols="1" rowHeight="100px">
-		  <mat-grid-tile
-	      *ngFor="let category of categories"
-	      colspan="1"
-	      rowspan="1"
-	      >
-	      
-	      <div style="width: 100%; height: 100%; ">
+	<mat-grid-list style="width:100%; flex: 70%; overflow-y: scroll; background: #55a555;"
+		cols="3" rowHeight="130px">
+		<mat-grid-tile
+			*ngFor="let tag of tags"
+			colspan="1"
+			rowspan="1">
+			
+			<div style="width: 100%; height: 100%; ">
 <!--
-	      	<div style="float: left;">
-	      		<img src="{{categorys.picture}}" style="width: 100px; height: 100px; margin-left: 0px; ">
-	      	</div>
+			<div style="float: left;">
+				<img src="{{tags.picture}}" style="width: 100px; height: 100px; margin-left: 0px; ">
+			</div>
 -->
-					<button mat-flat-button name="{{category.title}}" style="width: 100%; height: 100%; font-family: Eczar; font-size: 30px; background:#b7ffb7; " (click)="toggleInterest($event)">
-							<label style="width: 100%; height: 100%; color: black; ">
-								{{category.title}}
-							</label>
-					</button>
+			<button mat-flat-button name="{{tag.title}}" style="border-radius: 50%; width: 130px; height: 130px; font-family: Eczar; font-size: 20px; background:#b7ffb7; " (click)="toggleInterest($event)">
+				<label style="width: 100%; height: 100%; color: black; ">
+					{{tag.title.split('_')[tag.title.split('_').length - 1]}}
+				</label>
+			</button>
 
-	      </div>
-		    
-		  </mat-grid-tile>
-		</mat-grid-list>
-	</ng-scrollbar>
+			</div>
+		
+		</mat-grid-tile>
+	</mat-grid-list>
 
-	<div style="width: 100%; height: 10%;">
-		<button mat-flat-button style="width: 100%; height: 85%; background: #33aa33; border-radius: 0px 0px 10px 10px; color: white; font-size: 25px; font-family: cursive;" (click)="setInterests()">next</button>
+	<div style="width: 100%; flex: 10%;">
+		<button mat-flat-button style="width: 100%; height: 100%; background: #33b433; border-radius: 0px 0px 10px 10px; color: white; font-size: 25px; font-family: cursive;" (click)="setInterests()">next</button>
 	</div>
 </div> 
 

@@ -35,22 +35,23 @@ export class SignupComponent implements OnInit {
     var Nanobar = require('nanobar/nanobar.js');
     var nanobar = new Nanobar({ classname: "nanobarClass",
                                 id  : "nanobarId",
-                                target: document.getElementById('loginDiv')
+                                target: document.getElementById('main')
                                 });
     nanobar.go(100);
     
 
   }
-
-  signup(username: string, password: string, name: string): void {
-  	this.http.post<SignupResponse>('http://localhost:3000/signup',
-	 { username: username, password: password, name: name })
+  
+  signup(username: string, password: string, mobileNumber: string): void {
+  	this.http.post<SignupResponse>(`${localStorage.getItem("server")}/signup/member`,
+	 { username: username, password: password, mobileNumber: mobileNumber })
 		.subscribe(data => {
 			console.log(data);
-
+	
       this.usernameError = false;
       if (data.ok){
-        this.router.navigate(['/interests']);
+      	localStorage.setItem("username", username);
+        this.router.navigate(['/activation']);
       }
       else {
         if (data.problem == 'repetitive username'){
@@ -67,6 +68,52 @@ export class SignupComponent implements OnInit {
       }
       
 		});
+  }
+  
+  guest(): void {
+  	this.http.post<SignupResponse>(`${localStorage.getItem("server")}/signup/guest`, { })
+		.subscribe(data => {
+			console.log(data);
+	
+      this.usernameError = false;
+      if (data.ok){
+        
+        localStorage.setItem('username', data.username);
+        localStorage.setItem('password', data.password);
+		
+		this.http.post<LoginResponse>(`${localStorage.getItem("server")}/login`,
+		 { username: localStorage.getItem('username'), password: localStorage.getItem('username') })
+			.subscribe(data => {
+				console.log(data);
+				
+				if (data.ok){
+					localStorage.setItem("access_token", data.token);
+
+					this.router.navigate(['/interests']);
+					console.log('did it');
+				}
+				else {
+					this.router.navigate(['/login']);
+				}
+				
+			});
+        
+      }
+      else {
+        if (data.problem == 'repetitive username'){
+          this.usernameError = true;
+          this.usernameStatus = 'repetitive username !!!';
+        }
+        else if (0){
+
+        }
+        else {
+          this.router.navigate(['/signup']);
+        }
+        
+      }
+      
+	});
   }
 
   usernameChanged(username: string): void{
@@ -137,4 +184,16 @@ interface SignupResponse {
   user 			: string;
 	response 	: string;
   problem   : string;
+  username		: string;
+  password		: string;
+}
+
+
+interface LoginResponse {
+	response 	: string;
+  ok		 	: string;
+  token 		: string;
+  user 			: string;
+  username		: string;
+  password		: string;
 }

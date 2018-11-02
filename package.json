@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4200",
+    "start": "ng serve --host=0.0.0.0 --port 4200",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -30,6 +30,8 @@
     "nanobar": "^0.4.2",
     "ngx-color-picker": "^6.3.3",
     "ngx-scrollbar": "^2.1.0",
+    "primeicons": "^1.0.0-beta.10",
+    "primeng": "^6.0.0",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },

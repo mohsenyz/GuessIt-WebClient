@@ -1,6 +1,9 @@
 import { BrowserModule }           from '@angular/platform-browser';
 import { NgModule }                from '@angular/core';
-import { FormsModule }             from '@angular/forms'; // <-- NgModel lives here
+import { FormsModule,
+         ReactiveFormsModule }
+  from '@angular/forms'; // <-- NgModel lives here
+
 import { HttpClientModule }        from '@angular/common/http';
 import { RouterModule,
          Routes }
@@ -16,6 +19,7 @@ import { FriendsComponent }        from './friends/friends.component';
 import { GameViewComponent }       from './game-view/game-view.component';
 
 
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule,
          MatGridListModule,
@@ -24,11 +28,25 @@ import { MatButtonModule,
          MatInputModule,
          MatListModule,
          MatFormFieldModule,
-         MatProgressSpinnerModule }
-      from '@angular/material';
+         MatProgressSpinnerModule,
+         MatChipInputEvent,
+         MatAutocompleteSelectedEvent,
+         MatChipsModule,
+         MatIconModule,
+         MatAutocompleteModule,
+         MatSelectModule,
+         MatProgressBarModule
+      } from '@angular/material';
+      
+import {ScrollDispatchModule
+		} from '@angular/cdk/scrolling';
 
 
-import { ScrollbarModule }         from 'ngx-scrollbar';
+import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
+import {MenuItem} from 'primeng/api';                 //api
+import {CalendarModule} from 'primeng/calendar';
+
+//import { ScrollbarModule }         from 'ngx-scrollbar';
 import { ColorPickerModule }       from 'ngx-color-picker';
 
 import { JwtModule }               from '@auth0/angular-jwt';
@@ -36,6 +54,7 @@ import { StartupComponent }        from './startup/startup.component';
 import { ActivationComponent }     from './activation/activation.component';
 import { GamePlayComponent } from './game-play/game-play.component';
 import { GameNewComponent } from './game-new/game-new.component';
+import { ShopComponent } from './shop/shop.component';
 
 
 export function tokenGetter() {
@@ -50,6 +69,7 @@ const appRoutes: Routes = [
   { path: 'profile',            component: ProfileComponent },
   { path: 'game/:gameID/view',  component: GameViewComponent },
   { path: 'startup',            component: StartupComponent },
+  { path: 'shop',	            component: ShopComponent },
   { path: 'activation',         component: ActivationComponent },
   { path: 'game/new',           component: GameNewComponent },
   { path: 'game/:gameID/team/:teamID/play',      component: GamePlayComponent },
@@ -73,7 +93,9 @@ const appRoutes: Routes = [
     StartupComponent,
     ActivationComponent,
     GamePlayComponent,
-    GameNewComponent
+    GameNewComponent,
+    ShopComponent,
+
   ],
   imports: [
     RouterModule.forRoot(
@@ -87,18 +109,26 @@ const appRoutes: Routes = [
     MatGridListModule,
     MatButtonModule,
     MatInputModule,
-    ScrollbarModule,
+    //ScrollbarModule,
     MatButtonToggleModule,
     MatTabsModule,
     MatListModule,
     MatFormFieldModule,
     ColorPickerModule,
     MatProgressSpinnerModule,
-
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    CalendarModule,
+    MatSelectModule,
+    MatProgressBarModule,
+	ScrollDispatchModule,
+	
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ['localhost:3000'],
+        whitelistedDomains: ['87.236.209.215:3000'],
         blacklistedRoutes: [],
         headerName: 'authorization',
         authScheme: ''

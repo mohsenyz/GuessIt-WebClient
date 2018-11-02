@@ -1,0 +1,47 @@
+
+<div class="div" style="background: #33b433;border: 1px solid green">
+
+	<nav mat-tab-nav-bar style="width: 100%;" >
+	  <a mat-tab-link 
+	     *ngFor="let link of navLinks"
+	     [routerLink]="link.path"
+	     routerLinkActive #rla="routerLinkActive"
+	     [active]="rla.isActive"
+	     style="width: 100%">
+	    {{link.label}}
+	  </a>
+	</nav>
+
+	<router-outlet></router-outlet>
+	
+
+
+
+		<label [innerHtml]="'you have ' + user.coin + ' coins and ' + user.diamond + ' diamonds'"></label>
+		<mat-grid-list cols="2" rowHeight="100px">
+		
+			<mat-grid-tile style="overflow-y: scroll; height: 80%; width: 90%; border: 0px solid white; margin: auto;"
+				rowspan="10" colspan="2"  >
+				<mat-list class="goodsList">
+					<mat-list-item *ngFor="let good of goods" 
+							[style.background]="blue">
+							<button mat-raised-button style="text-align: center; width: 100%; background: #f90; " (click)="buy(good._id)">
+							<div style="width: 100%; height: 100%; text-align: center; ">
+								{{ good.count }} {{ good.name }}
+							<br>
+							<label [innerHtml]="'Cost: ' + good.cost + ' Toman'"></label>
+							<br>
+							<label [innerHtml]="BUY"></label>
+							</div>
+
+							</button>
+					</mat-list-item>
+				</mat-list>
+			</mat-grid-tile>
+			
+
+
+		</mat-grid-list>
+
+
+</div>

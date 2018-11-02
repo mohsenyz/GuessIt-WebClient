@@ -45,7 +45,10 @@ import { GameService }
 export class GameViewComponent implements OnInit {
 	
 	game = {};
-	inGame = false;
+	isInGame = false;
+	teamNames = [];
+	myTeam = localStorage.getItem("username");
+
 
   constructor(
 		private http    	: HttpClient,
@@ -57,6 +60,7 @@ export class GameViewComponent implements OnInit {
 
   ngOnInit() {
   	this.viewGame(this.route.snapshot.params.gameID);
+  	localStorage.setItem("isInGame", "false");
   }
 
 
@@ -68,15 +72,21 @@ export class GameViewComponent implements OnInit {
 				this.game = viewGameResponse.game;
     		    		
 	    		viewGameResponse.game.teams.forEach(function(team){
-	    			team.players.forEach(function(player){
-	    				console.log(player.player);
-	    				console.log(localStorage.getItem("username"));
-
-	    				if (player.player == localStorage.getItem("username")){
-	    					this.inGame = true;
-	    				}
+	    			
+    				if (team.team == localStorage.getItem("username")){
+    					localStorage.setItem("isInGame", "true");
+    					//this.isInGame = true;
+    					console.log('you are in game');
+    				}
+	    			
+	    			team.members.forEach(function(player){
+	    				
 	    			});
 	    		});
+
+	    		viewGameResponse.game.teams.forEach(function(team){
+					this.teamNames.push(team.team);
+				});
 
 			}
 			else {
@@ -92,15 +102,24 @@ export class GameViewComponent implements OnInit {
     this.GameService.joinGame(gameID, localStorage.getItem("username")).subscribe(
 		(joinGameResponse: joinGameResponse) => {
 			if (joinGameResponse.ok){
-
-				this.router.navigate([`/game/${gameID}/team/${localStorage.getItem("username")}/play`]);
-
+				
+				this.viewGame(this.route.snapshot.params.gameID);
+				
+				//this.router.navigate([`/game/${gameID}/team/${localStorage.getItem("username")}/play`]);
 			}
 			else {
 
 			}
 		}
     );
+  }
+
+  openGame(gameID: string): void{
+    this.router.navigate([`/game/${gameID}/team/${localStorage.getItem("username")}/play`]);
+  }
+
+  inGame(){
+  	return localStorage.getItem("isInGame") == "true";
   }
 
 

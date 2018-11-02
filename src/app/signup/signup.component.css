@@ -1,14 +1,46 @@
-.div{
-    width: 80%;
-    height: 100%;
-    max-width: 400px;
-    min-width: 300px;
-    margin: auto;
+#main{
+
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+
+    max-width:100%;
+    max-height:100%;
+    overflow:auto;
+    
     border: 1px solid #00c;
     border-radius: 10px;
     background: white;
-    overflow:  hidden;
+    
 }
+
+
+@media (min-width: 800px) {
+
+	#main{
+
+		width: 400px;
+		height: 500px;
+
+	}
+
+}
+
+@media (max-width: 800px) {
+
+	#main{
+
+		width: 400px;
+		height: 500px;
+
+	}
+
+}
+
+
 .nanobarClass{
     border-radius: 5;
     border: 1px solid blue;

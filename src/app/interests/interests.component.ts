@@ -26,8 +26,8 @@ import {
   keyframes
 } from '@angular/animations';
 
-import { CategoryService } 
-  from '../category.service';
+import { TagService } 
+  from '../tag.service';
 
 @Component({
   selector: 'app-interests',
@@ -74,25 +74,27 @@ import { CategoryService }
 export class InterestsComponent implements OnInit {
 	
   
-  categories = [];
+  tags = [];
   interests = [];
 
   constructor(
 		private   http              : HttpClient,
 		public    router            : Router,
-    private   CategoryService   : CategoryService
+		private   TagService   : TagService
   ) { }
 
 
   ngOnInit() {
-    this.searchCategory();
+    this.searchTag();
   }
 
-  searchCategory(): void{
-    this.CategoryService.search().subscribe(
+  searchTag(): void{
+    this.TagService.search().subscribe(
       (searchResponse) => {
         if (searchResponse.ok){
-          this.categories = searchResponse.categories;
+        
+       		this.tags = searchResponse.tags;
+        
         }
         else {
 
@@ -102,8 +104,8 @@ export class InterestsComponent implements OnInit {
   }
   
   setInterests(): void {
-  	this.http.post<EditUserResponse>('http://localhost:3000/me/edit',
-	 	{ interests: this.interests }, { withCredentials: true })
+  	this.http.post<EditUserResponse>(`${localStorage.getItem("server")}/me/edit`,
+	 	{ interests: this.interests })
 		.subscribe(data => {
 			console.log(data);
       if (data.ok){
@@ -147,6 +149,6 @@ export class InterestsComponent implements OnInit {
 }
 
 interface EditUserResponse {
-	ok				: string;
+	ok			: string;
 	response 	: string;
 }

@@ -7,25 +7,20 @@ export class Game {
 	teams					: [{
 		team				: string;
 		
-		players			: [{
-			player		: string;
+		members			: [{
+			member		: string;
 			rounds		: [ number ];
 		}],
 		
 		rounds			: [{
-			players		: [{
-				player	: string;
+			members		: [{
+				member	: string;
 				answer	: {
 					content	: String;
 				}
 			}];
-			question	: string;
-			helps			: [{
-				help		: string;
-				usage		: number;
-				date		: Date;
-			}],
-			score			: number;
+			question	: Question;
+			score		: number;
 		}]
 	}];
 	
@@ -68,5 +63,7 @@ export class Game {
 	creator				: string;
 	
 	started				: boolean;
+
+	timeToStart 		: number;
 	
 }

@@ -1,20 +1,20 @@
-<div class="div" style="background: green;border: 1px solid darkgreen">
+<div class="div" style="backgparseInt: green;border: 1px solid darkgreen">
 	
 	<div *ngIf="gameEnded == false" style="width: 100%; height: 100%;">
 		<div id="topMenu" style="width: 100%; height: 10%; text-align: center; ">
-			<div style="font-family: gabroila; font-size: 20px"> 
-				score : {{score}}
+			<div style="font-family: gabroila; font-size: 20px" (click)="loadNextQuestion()">
+				<pre>Score : {{score}} - Question : {{currentRound}} / {{game.questions.length}} </pre>
 			</div>
 		</div>
 		
-		<div id="questionDiv" style="width: 100%; height: 80%; text-align: center; background: green; ">
+		<div id="questionDiv" style="width: 100%; height: 80%; text-align: center; backgparseInt: green; ">
 			
 			<div id="titleDiv" style="width: 100%; height: 15%; text-align: center; ">
 
 				<div style="width: 100%; height: 100%; border: solid 1px darkgreen; direction: ltr; color: white; ">
 					
-					<div style="margin: 3% auto; font-family: koodak, gabroila; font-size: 20px">
-						{{currentQuestion.title}}
+					<div style="margin: 3% auto; font-family: koodak, gabroila; font-size: 20px; direction: rtl; "
+							[innerHtml]="game.questions[currentRound].title_fa">
 					</div>
 
 				</div>
@@ -23,41 +23,39 @@
 			
 			<div id="contentDiv" style="width: 100%; height: 35%; text-align: center; "> 
 
-					<div style=" direction: rtl; font-family: koodak; font-size: 30px; ">
-						
-						<mat-grid-list cols="4" rowHeight="155px" style="border: solid 1px darkgreen;">
+				<div style=" direction: rtl; font-family: koodak; font-size: 30px; ">
+					
+					<mat-grid-list cols="12" rowHeight="155px" style="border: solid 1px darkgreen;">
 
-							<mat-grid-tile *ngFor="let subtitle of currentQuestion.subtitle" colspan="1" rowspan="1">
+						<mat-grid-tile *ngFor="let subtitle of game.questions[currentRound].subtitle_fa" [colspan]="(12/game.questions[currentRound].subtitle_fa.length)" rowspan="1">
 
-								<p *ngIf="currentQuestion.subtitleType == 'text'" style="max-height: 95%; max-width: 95%; border-radius: 10px; font-size: 15px; ">{{subtitle}}</p>
+							<p *ngIf="game.questions[currentRound].subtitle_type == 'text'" style="max-height: 95%; max-width: 95%; border-radius: 10px; font-size: 15px; ">{{subtitle}}</p>
 
-								<img *ngIf="currentQuestion.subtitleType == 'image'" src="{{subtitle}}" style="max-height: 95%; max-width: 95%; border-radius: 10px; ">
+							<img *ngIf="game.questions[currentRound].subtitle_type == 'image'" src="{{subtitle}}" style="max-height: 95%; max-width: 95%; border-radius: 10px; ">
 
-								<audio *ngIf="currentQuestion.subtitleType == 'audio'" style="max-height: 95%; max-width: 95%; border-radius: 10px; ">
-									<source src="{{subtitle}}" type="audio/mpeg">
-								</audio>
+							<audio *ngIf="game.questions[currentRound].subtitle_type == 'audio'" style="max-height: 95%; max-width: 95%; border-radius: 10px; " autoplay>
+								<source src="{{subtitle}}" type="audio/mpeg">
+							</audio>
 
-								<video *ngIf="currentQuestion.subtitleType == 'video'" style="max-height: 95%; max-width: 95%; border-radius: 10px; " autoplay>
-									<source src="{{subtitle}}" type="video/mp4">
-								</video>
+							<video *ngIf="game.questions[currentRound].subtitle_type == 'video'" style="max-height: 95%; max-width: 95%; border-radius: 10px; " autoplay>
+								<source src="{{subtitle}}" type="video/mp4">
+							</video>
 
-							</mat-grid-tile>
+						</mat-grid-tile>
 
-						</mat-grid-list>
+					</mat-grid-list>
 
-					</div>
+				</div>
 				
 			</div>
 			
 			<div id="helpDiv" style="width: 100%; height: 15%; font-size: 20px; text-align: center; ">
 				
-				<mat-grid-list cols="{{currentQuestion.helps.length}}" rowHeight="65px" style="border: solid 1px darkgreen;">
+				<mat-grid-list cols="12" rowHeight="65px" style="border: solid 1px darkgreen;">
 					
-					<mat-grid-tile *ngFor="let help of currentQuestion.helps" colspan="1" rowspan="1" >
-						<ng-scrollbar>
-							<p style=" font-family: Simonetta;">{{help}}
-							</p>
-						</ng-scrollbar>
+					<mat-grid-tile *ngFor="let help of game.questions[currentRound].helps" [colspan]="(12/game.questions[currentRound].helps.length)" rowspan="1" >
+						<p style=" font-family: Simonetta;">{{help}}
+						</p>
 					</mat-grid-tile>
 
 				</mat-grid-list>
@@ -66,43 +64,48 @@
 			
 			<div id="answeringDiv" style="width: 100%; height: 35%; text-align: center; ">
 				<div style=" margin: auto; direction: rtl; font-family: koodak">
-					
-					<mat-grid-list cols="2" rowHeight="77px" style="border: solid 1px darkgreen;">
+					<div *ngIf="game.questions[currentRound].type == 'multi_choice'">
+						<mat-grid-list cols="2" rowHeight="77px" style="border: solid 1px darkgreen;">
 
-						<mat-grid-tile *ngFor="let choice of currentQuestion.choices" colspan="1" rowspan="1">
-							
-							<button mat-flat-button style="width: 100%; height: 100%; background: #33aa33; border-radius: 10px; color: white; font-size: 15px; font-family: cursive;" (click)="sendAnswer(choice)">
-								<p *ngIf="currentQuestion.answerType == 'text'" style="max-height: 95%; max-width: 95%; border-radius: 10px; font-size: 15px; ">{{choice}}</p>
+							<mat-grid-tile *ngFor="let choice of game.questions[currentRound].choices_fa" colspan="1" rowspan="1">
+								
+								<button mat-flat-button style="width: 100%; height: 100%; backgparseInt: #33aa33; border-radius: 10px; color: white; font-size: 15px; font-family: cursive;" (click)="sendAnswer(choice)">
+									<p *ngIf="game.questions[currentRound].answer_type == 'text'" style="max-height: 95%; max-width: 95%; border-radius: 10px; font-size: 15px; ">{{choice}}</p>
 
-								<img *ngIf="currentQuestion.answerType == 'image'" src="{{choice}}" style="max-height: 95%; max-width: 95%; border-radius: 10px; ">
+									<img *ngIf="game.questions[currentRound].answer_type == 'image'" src="{{choice}}" style="max-height: 95%; max-width: 95%; border-radius: 10px; ">
 
-								<audio *ngIf="currentQuestion.answerType == 'audio'" style="max-height: 95%; max-width: 95%; border-radius: 10px; ">
-									<source src="{{choice}}" type="audio/mpeg">
-								</audio>
+									<audio *ngIf="game.questions[currentRound].answer_type == 'audio'" style="max-height: 95%; max-width: 95%; border-radius: 10px; ">
+										<source src="{{choice}}" type="audio/mpeg">
+									</audio>
 
-								<video *ngIf="currentQuestion.answerType == 'video'" style="max-height: 95%; max-width: 95%; border-radius: 10px; " autoplay>
-									<source src="{{choice}}" type="video/mp4">
-								</video>
-							</button>
+									<video *ngIf="game.questions[currentRound].answer_type == 'video'" style="max-height: 95%; max-width: 95%; border-radius: 10px; " autoplay>
+										<source src="{{choice}}" type="video/mp4" autoplay>
+									</video>
 
-						</mat-grid-tile>
+								</button>
 
-					</mat-grid-list>
-					
+							</mat-grid-tile>
 
+						</mat-grid-list>
+					</div>
+					<div *ngIf="game.questions[currentRound].type == 'writing'">
+						<mat-form-field class="field">
+							<input matInput #answerInput type="text" name="answer" placeholder="answer" (keydown.enter)="sendAnswer(answerInput.value)">
+						</mat-form-field>
+					</div>
 				</div>
 
 			</div>
 
 		</div>
 
-		<div id="bottomMenu" style="width: 100%; height: 10%; text-align: center; font-size: 20px; ">
-			<div [innerHtml]="currentRound"></div> / 20
-		</div>
 	</div>
 
 	<div *ngIf="gameEnded == true" style="width: 100%; height: 100%; ">
-		game ended
+		<div style="font-size: 36px; text-align: center; width: 100%; padding-top: 30%;" [innerHtml]="score"></div>
+
+		<div style="font-size: 36px; text-align: center; width: 100%; padding-top: 0%;" [innerHtml]="'score'"></div>
+
 	</div>
 
 </div>
