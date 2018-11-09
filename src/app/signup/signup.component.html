@@ -1,37 +1,43 @@
-
-<div id="main" style="display: flex; text-align: center; flex-direction: column; align-items: center;">
-
-	<form class="form">
-
-		<div style="flex: 10%; padding-top: 10%; font-size: 30px;" [innerHtml]=""></div>
+<div id="body">
+<div id="main">
+	<form>
+		<div class="title">sign up</div>
 		
-		<mat-form-field class="field" style="flex: 20%; width: 80%; font-size: 25px;">
-	    	<input matInput #usernameInput type="text" name="username" placeholder="username" maxlength="50" (keyup)="usernameChanged(usernameInput.value)">
-	    	<mat-hint [style.color]='usernameStatusColor' >{{usernameStatus}}</mat-hint>
+		<mat-form-field>
+	    	<input matInput #username type="text" maxlength="30">
+			<mat-placeholder>username</mat-placeholder>
 	    </mat-form-field>
 
-		<mat-form-field class="field" style="flex: 20%; width: 80%; font-size: 25px;">
-			<input matInput #passwordInput type="password" name="password" placeholder="password" maxlength="50" (keyup)="passwordChanged(passwordInput.value)">
-			<mat-hint [style.color]='usernameStatusColor' >{{passwordStatus}}</mat-hint>
+		<mat-form-field>
+			<input matInput #password type="password" maxlength="30">
+			<mat-placeholder>password</mat-placeholder>
 	    </mat-form-field>
 	    
-		<mat-form-field class="field" style="flex: 20%; width: 80%; font-size: 25px;">
-	    	<input matInput #mobileNumberInput type="text" name="mobileNumber" placeholder="mobile number" maxlength="15" (keyup)="mobileNumberChanged(mobileNumberInput.value)">
-	    	<mat-hint [style.color]='usernameStatusColor' >{{mobileNumberStatus}}</mat-hint>
-	    </mat-form-field>
-		
-		<div style="flex: 30%; display: flex; text-align: center; flex-direction: column; align-items: center; padding-top: 7%; ">
-			<button mat-raised-button style="flex: 90%; padding: 10px; font-size: 25px;"
-					name="signup" (click)="signup(usernameInput.value, passwordInput.value, mobileNumberInput.value)"
-					value="signup">Signup</button>
-			
-			<label style="flex: 10%; padding: 10px; font-size: 15px; cursor: pointer"
-					name="guest" (click)="guest()" 
-					value="guest">Play as a Guest</label>
+		<mat-form-field>
+			<input matInput #mobileNumber type="text" maxlength="15">
+			<mat-placeholder>mobile number</mat-placeholder>
+		</mat-form-field>
+	
+		<div class="error-field" *ngIf="problem">
+			{{ problem }}
 		</div>
 		
+		<div class="agreement-field">
+			<mat-checkbox [(ngModel)]="agree">
+				<label style="color: rgb(11, 66, 99);">agree to the terms and conditions</label>
+			</mat-checkbox>
+		</div>
+		
+		<div class="submit-field">
+			<button mat-button (click)="signup(username.value, password.value, mobileNumber.value)">
+				signup
+			</button>
+			<button mat-button (click)="guest()">
+				Play as a Guest
+			</button>
+		</div>
 	</form>
-	
-	
 </div>
+</div>
+
 

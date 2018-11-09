@@ -1,0 +1,6 @@
+{
+    "files.autoSave": "onFocusChange",
+    "html.format.indentInnerHtml": true,
+    "html.format.endWithNewline": true,
+    "emmet.showSuggestionsAsSnippets": true
+}

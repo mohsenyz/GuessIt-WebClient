@@ -16,16 +16,52 @@
 */
 
 @font-face {
-  font-family: 'Baloo Bhaijaan';
-  src: url('assets/fonts/BalooBhaijaan-Regular.ttf');
+	font-family: 'Baloo Bhaijaan';
+	src: url('assets/fonts/BalooBhaijaan-Regular.ttf');
 }
 
 @font-face {
-  font-family: 'koodak';
-  src: url('assets/fonts/koodak.ttf');
+	font-family: 'koodak';
+	src: url('assets/fonts/koodak.ttf');
 }
 
 @font-face {
-  font-family: 'gabriola';
-  src: url('assets/fonts/Gabriola.ttf');
+	font-family: 'gabriola';
+	src: url('assets/fonts/Gabriola.ttf');
+}
+
+
+* {
+	font-family: 'Baloo Bhaijaan';
+}
+
+#main{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+    max-width:100%;
+    max-height:100%;
+    overflow:auto;
+    border-radius: 10px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (min-width: 800px) {
+	#main{
+		width: 400px;
+		height: 500px;
+	}
+}
+
+@media (max-width: 800px) {
+	#main{
+		width: 400px;
+		height: 500px;
+    }
 }
