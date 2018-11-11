@@ -46,12 +46,12 @@ mat-placeholder{
 
 .error-field{
     flex: 10%;
-    padding: 5%;
+    padding: 4%;
 }
 
 .agreement-field{
     flex: 10%;
-    padding: 5%;
+    padding-top: 4%;
 }
 
 .submit-field{
