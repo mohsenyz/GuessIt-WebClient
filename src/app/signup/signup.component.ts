@@ -14,7 +14,7 @@ import { SignupResponse } from '../SignupResponse';
 export class SignupComponent implements OnInit {
 
     problem = '';
-    agree: boolean;
+    agree = false;
 
     constructor(private http: HttpClient, public  router: Router) { }
 
