@@ -1,19 +1,22 @@
-<div id="main">
-	
-	<form style="width: 100%; ">
-		<div name="title" style="flex: 20%; width: 100%; padding: 10%; font-size: 30px; background: red; " [innerHtml]="'Activation'"></div>
+<div id="body">
+<div id="main">	
+	<form>
+		<div class="title">Activation</div>
 		
-		<mat-form-field class="field" style="display: flex; text-align: center; flex-direction: column; align-items: center; flex: 20%; width: 100%; padding-top: 20%; ">
-	    	<input matInput #codeInput type="code" name="code" style="flex: 100%; width: 100%; "
-	    			placeholder="code" maxlength="5" (keyup)="codeChanged(codeInput.value)">
+		<mat-form-field>
+	    	<input matInput #code type="code" maxlength="5" (keyup)="codeChanged(code.value)">
+				<mat-placeholder>code</mat-placeholder>
 	    </mat-form-field>
 	    
-	    <div style="flex: 20%; padding-top: 20%;">
-			<button mat-raised-button name="active" (click)="active(codeInput.value)" value="active">
+		<div class="error-field">
+			{{ problem }}
+		</div>
+		
+	    <div class="submit-field">
+			<button mat-button (click)="active(code.value)">
 				active
 			</button>
 		</div>
-		
 	</form>
-	
+</div>
 </div>

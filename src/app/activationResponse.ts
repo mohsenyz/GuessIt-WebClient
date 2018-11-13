@@ -1,4 +1,6 @@
 export class activationResponse {
-	ok					: string;
-	response 			: string;
+    ok: string;
+    user: string;
+    response: string;
+    problem: string;
 }

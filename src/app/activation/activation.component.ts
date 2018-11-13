@@ -12,6 +12,8 @@ import { activationResponse } from '../activationResponse';
 @Injectable()
 export class ActivationComponent implements OnInit {
 
+    problem = '';
+
     constructor(private http: HttpClient, public router: Router) { }
 
     ngOnInit() { }
@@ -21,9 +23,9 @@ export class ActivationComponent implements OnInit {
             `${localStorage.getItem('server')}/signup/activation/user/${localStorage.getItem('username')}/code/${code}`, {})
             .subscribe(data => {
                 if (data.ok) {
-                    this.router.navigate(['/interests']);
+                    this.router.navigate(['/main']);
                 } else {
-
+                    this.problem = data.problem;
                 }
         });
     }
