@@ -1,16 +1,50 @@
-.div{
-    width: 90vw;
-    height: 90vh;
-    margin-top: 5vh;
-    margin-left: 5vw;
-    border: 1px solid #00c;
-    border-radius: 10px;
+* {
+    color: white;
 }
 
-.form .field{
+#body{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
     width: 100%;
-    font-size: 25px;
-    text-align: center;
-    color: blue;
+    height: 100%;
+    background: rgb(11, 66, 99);
+}
 
+#main{
+    background: rgb(12, 115, 175);
+    opacity: 1;
+    height: 90vh;
+    width: 85vw;
+    display: flex;
+    
+}
+
+
+.main{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.submit-field{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+button{
+    flex: 100%;
+    width: 100%;
+    min-width: 100px;
+    padding: 2px;
+	font-size: 25px;
+    background: rgb(17, 96, 145);
+    color: rgb(11, 66, 99);
 }

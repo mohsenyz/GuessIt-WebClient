@@ -40,6 +40,7 @@ export class MainComponent implements OnInit {
     ngOnInit() {
         this.getProfile();
         this.getListOfGames();
+        this.timeToStartTimer();
     }
 
     getListOfGames(): void {
@@ -107,7 +108,7 @@ export class MainComponent implements OnInit {
     }
 
     timeToStartTimer(): void {
-        // console.log("game.timeToStart");
+        console.log('game.timeToStart');
         if (this.games) {
             // console.log("game.timeToStart");
             this.games.forEach(function(game) {
@@ -117,7 +118,7 @@ export class MainComponent implements OnInit {
                 // console.log(game.timeToStart);
             });
         }
-
+        setTimeout(this.timeToStartTimer, 1000 * 1);
     }
 
 }
