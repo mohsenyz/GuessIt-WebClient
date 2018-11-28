@@ -7,7 +7,6 @@ import { GameListResponse } from '../GameListResponse';
 import { GameJoinResponse } from '../GameJoinResponse';
 import { MeService } from '../me.service';
 
-
 @Component({
     selector:     'app-main',
     templateUrl:  './main.component.html',
@@ -30,6 +29,7 @@ export class MainComponent implements OnInit {
     games:          Game[];
     wantedGames:    Game[];
     user:           User;
+    smallWidth = false;
 
     constructor(
         private http:       HttpClient,
@@ -38,6 +38,7 @@ export class MainComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        
         this.getProfile();
         this.getListOfGames();
         this.timeToStartTimer();

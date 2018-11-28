@@ -32,7 +32,8 @@ import { MatButtonModule,
          MatAutocompleteModule,
          MatSelectModule,
          MatCheckboxModule,
-         MatProgressBarModule
+        MatProgressBarModule,
+        MatMenuModule
       } from '@angular/material';
 
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
@@ -116,6 +117,7 @@ const appRoutes: Routes = [
         MatProgressBarModule,
         ScrollDispatchModule,
         MatCheckboxModule,
+        MatMenuModule,
 
         JwtModule.forRoot({
             config: {
