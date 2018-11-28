@@ -77,19 +77,19 @@
 }
 
 @media (min-width: 800px) {
-	.gameList.big {
-        visibility: visible;
+	.gamesList.big {
+        display: block;
     }
-    .gameList.small {
-        visibility: hidden;
+    .gamesList.small {
+        display: none;
     }
 }
 
 @media (max-width: 800px) {
-	.gameList.big {
-        visibility: hidden;
+	.gamesList.big {
+        display: none;
     }
-    .gameList.small {
-        visibility: visible;
+    .gamesList.small {
+        display: block;
     }
 }

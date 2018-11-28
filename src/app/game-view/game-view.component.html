@@ -1,23 +1,35 @@
 <div id="body">
 <div id="main">
 
-	<div style="flex: 20%; padding-top: 6vh; font-size: 30px;">
+	<div style="flex: 9%; padding-top: 6vh; font-size: 30px;">
 		{{ game.name }} 
 	</div>
 	
 	<div style="flex: 5%;"> 
-		Categories: {{ game.rules.rounds.tags }} 
+		Tags: {{ game.rules.rounds.tags }} 
 	</div>
 	
 	<div style="flex: 5%;">
-		Time of start: {{ game.rules.start.date }} 
+		Starts at: {{ date }} 
 	</div>
 	
-	<mat-list style="flex: 20%; width: 70%; overflow-y: scroll;">
+	<div style="flex: 5%;">
+		Duration: 300 seconds 
+	</div>
+
+	<div style="flex: 5%;">
+		Level: 30 
+	</div>
+	
+	<div style="flex: 5%;">
+		Prize: 99999 coins 
+	</div>
+	
+	<!--mat-list style="flex: 20%; width: 30%; overflow-y: scroll;">
 		<mat-list-item *ngFor="let team of game.teams" style="text-align: center">
 			{{ team.team }}
 		</mat-list-item>
-	</mat-list>
+	</mat-list-->
 
 	<div class="submit-field">
 		<button mat-button *ngIf='!inGame()' (click)="joinGame(game.name)">
