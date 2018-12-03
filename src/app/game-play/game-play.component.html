@@ -1,7 +1,7 @@
 <div id="body">
 <div id="main">
 	<div class="main" *ngIf="gameEnded == false">
-		
+
 		<div style="width: 100%; flex: 10%; text-align: center;">
 			<div style="font-family: gabroila; font-size: 20px" (click)="loadNextQuestion()">
 				<pre> Score : {{score}} - Question : {{currentRound}} / {{game.questions.length}} </pre>
@@ -11,8 +11,8 @@
 		<div class="title" style="width: 98%; flex: 15%; text-align: center; font-family: koodak, gabroila; font-size: 20px; direction: rtl;">
 			{{ game.questions[currentRound].title_fa }}
 		</div>
-		
-		<div class="subtitle" style="width: 100%; flex: 35%; text-align: center; padding: 10px;"> 
+
+		<div class="subtitle" style="width: 100%; flex: 35%; text-align: center; padding: 10px;">
 
 			<mat-grid-list cols="12" rowHeight="155px">
 
@@ -33,13 +33,13 @@
 				</mat-grid-tile>
 
 			</mat-grid-list>
-			
+
 		</div>
-		
+
 		<div class="help" style="width: 100%; flex: 15%; font-size: 20px; text-align: center; ">
-			
+
 			<mat-grid-list cols="12" rowHeight="65px">
-				
+
 				<mat-grid-tile *ngFor="let help of game.questions[currentRound].helps" [colspan]="(12/game.questions[currentRound].helps.length)" rowspan="1" >
 					<p style=" font-family: Simonetta;"> {{ help }} </p>
 				</mat-grid-tile>
@@ -47,14 +47,14 @@
 			</mat-grid-list>
 
 		</div>
-		
+
 		<div class="answer submit-field" style="flex: 25%;">
 			<div style=" margin: auto; direction: rtl; font-family: koodak">
 				<div *ngIf="game.questions[currentRound].type == 'multi_choice'">
 					<mat-grid-list cols="2" [rowHeight]="'100' + 'px'">
 
 						<mat-grid-tile *ngFor="let choice of game.questions[currentRound].choices_fa" colspan="1" rowspan="1">
-							
+
 							<button mat-button style="width: 100%; height: 100%; backgparseInt: #33aa33; border-radius: 10px; color: white; font-size: 15px; font-family: cursive;" (click)="sendAnswer(choice)">
 								<p *ngIf="game.questions[currentRound].answer_type == 'text'" style="max-height: 95%; max-width: 95%; border-radius: 10px; font-size: 15px; ">{{choice}}</p>
 
@@ -78,10 +78,22 @@
 				<div *ngIf="game.questions[currentRound].type == 'writing'">
 					<input matInput #answerInput type="text" name="answer" placeholder="answer" (keydown.enter)="sendAnswer(answerInput.value)">
 				</div>
-		
+
+				<div *ngIf="game.questions[currentRound].type == 'selective'">
+					<mat-grid-list cols="2" [rowHeight]="'100' + 'px'">
+
+						<mat-grid-tile *ngFor="let choice of game.questions[currentRound].choices_fa" colspan="1" rowspan="1">
+							<input type="checkbox" name="answer" value="{{choice}}"/>
+						</mat-grid-tile>
+					</mat-grid-list>
+					<button mat-button style="width: 100%; backgparseInt: #33aa33; border-radius: 10px; color: white; font-size: 15px; font-family: cursive;" (click)="sendAnswer(choice)">
+						<p style="max-height: 95%; max-width: 95%; border-radius: 10px; font-size: 15px; ">Submit</p>
+					</button>
+				</div>
+
 				<div *ngIf="game.questions[currentRound].type == 'true_false'">
 					<mat-grid-list cols="2" [rowHeight]="'100' + 'px'">
-								
+
 						<mat-grid-tile *ngFor="let choice of ['علط', 'درست']" colspan="1" rowspan="1">
 							<button mat-button style="width: 100%; height: 100%; backgparseInt: #33aa33; border-radius: 10px; color: white; font-size: 15px; font-family: cursive;" (click)="sendAnswer(choice)">
 								<p style="max-height: 95%; max-width: 95%; border-radius: 10px; font-size: 15px; ">{{choice}}</p>
@@ -90,7 +102,7 @@
 
 					</mat-grid-list>
 				</div>
-					
+
 			</div>
 
 		</div>

@@ -1,10 +1,10 @@
-import { Injectable } 
+import { Injectable }
 	from '@angular/core';
 
 import { HttpClient }
 	from '@angular/common/http';
 
-import { Observable, of } 
+import { Observable, of }
 	from 'rxjs';
 
 import { User }
@@ -15,7 +15,7 @@ import { Question }
 
 import { Game }
 	from './game';
-	
+
 import { sendAnswerResponse }
 	from './sendAnswerResponse';
 
@@ -36,7 +36,7 @@ export class GameService {
   	constructor(
   		private http    	: HttpClient,
 	) {}
-  	
+
 
 	joinGame(gameID: string, teamID: string): Observable<joinGameResponse>{
 		return this.http.post<joinGameResponse>(`${localStorage.getItem("server")}/game/${gameID}/team/${teamID}/join`, {});
@@ -45,8 +45,8 @@ export class GameService {
 	viewGame(gameID: string): Observable<viewGameResponse>{
 		return this.http.post<viewGameResponse>(`${localStorage.getItem("server")}/game/${gameID}/view`, {});
 	}
-	
-	sendAnswer(gameID: string, round: number, answer: string): Observable<sendAnswerResponse>{
+
+	sendAnswer(gameID: string, round: number, answer: any): Observable<sendAnswerResponse>{
 		return this.http.post<sendAnswerResponse>(`${localStorage.getItem("server")}/game/${gameID}/round/${round}/answer`, { answer: answer, questionID: round});
 	}
 
